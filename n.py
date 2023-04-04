@@ -64,7 +64,7 @@ def map_keyboard():
         while diff > 0.001:
             # limb.set_joint_positions(pos_dict)
             print("vector diff is ",diff)
-            y=input("break?")
+            y=raw_input("break?")
             if y=="y":
                 break
             pass
