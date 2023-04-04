@@ -53,8 +53,8 @@ def map_keyboard():
         joint_command = {joint_name: current_position + delta}
         limb.set_joint_positions(joint_command)
     
-    def set_arm_pos(lim,pos_dict):
-        lim.set_joint_positions(pos_dict)
+    def set_arm_pos(limb,pos_dict):
+        limb.set_joint_positions(pos_dict)
 
     default_l_pos = {
         lj[0] : 0.00383 ,
@@ -99,7 +99,7 @@ def map_keyboard():
     left = baxter_interface.Limb('left')
     right = baxter_interface.Limb('right')
     print("left join_states",left.joint_angles())
-
+    print("left cartesian pose" , left._cartesian_pose)
     print("right joint states ",right.joint_angles(),"\n")
     set_arm_pos(left,default_l_pos)
     set_arm_pos(right,default_r_pos)
