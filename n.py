@@ -60,8 +60,13 @@ def map_keyboard():
     
     def set_arm_pos(limb,pos_dict):
         limb.set_joint_positions(pos_dict)
-        while vector_diff(limb.joint_angles(),pos_dict) > 0.001:
+        diff =vector_diff(limb.joint_angles(),pos_dict)
+        while diff > 0.001:
             # limb.set_joint_positions(pos_dict)
+            print("vector diff is ",diff)
+            y=input("break?")
+            if y=="y":
+                break
             pass
 
 
