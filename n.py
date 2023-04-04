@@ -52,52 +52,61 @@ def map_keyboard():
         current_position = limb.joint_angle(joint_name)
         joint_command = {joint_name: current_position + delta}
         limb.set_joint_positions(joint_command)
-
-    bindings = {
-    #   key: (function, args, description)
-        '9': (set_j, [left, lj[0], 0.1], "left_s0 increase"),
-        '6': (set_j, [left, lj[0], -0.1], "left_s0 decrease"),
-        '8': (set_j, [left, lj[1], 0.1], "left_s1 increase"),
-        '7': (set_j, [left, lj[1], -0.1], "left_s1 decrease"),
-        'o': (set_j, [left, lj[2], 0.1], "left_e0 increase"),
-        'y': (set_j, [left, lj[2], -0.1], "left_e0 decrease"),
-        'i': (set_j, [left, lj[3], 0.1], "left_e1 increase"),
-        'u': (set_j, [left, lj[3], -0.1], "left_e1 decrease"),
-        'l': (set_j, [left, lj[4], 0.1], "left_w0 increase"),
-        'h': (set_j, [left, lj[4], -0.1], "left_w0 decrease"),
-        'k': (set_j, [left, lj[5], 0.1], "left_w1 increase"),
-        'j': (set_j, [left, lj[5], -0.1], "left_w1 decrease"),
-        '.': (set_j, [left, lj[6], 0.1], "left_w2 increase"),
-        'n': (set_j, [left, lj[6], -0.1], "left_w2 decrease"),
-        ',': (grip_left.close, [], "left: gripper close"),
-        'm': (grip_left.open, [], "left: gripper open"),
-        '/': (grip_left.calibrate, [], "left: gripper calibrate"),
-
-        '4': (set_j, [right, rj[0], 0.1], "right_s0 increase"),
-        '1': (set_j, [right, rj[0], -0.1], "right_s0 decrease"),
-        '3': (set_j, [right, rj[1], 0.1], "right_s1 increase"),
-        '2': (set_j, [right, rj[1], -0.1], "right_s1 decrease"),
-        'r': (set_j, [right, rj[2], 0.1], "right_e0 increase"),
-        'q': (set_j, [right, rj[2], -0.1], "right_e0 decrease"),
-        'e': (set_j, [right, rj[3], 0.1], "right_e1 increase"),
-        'w': (set_j, [right, rj[3], -0.1], "right_e1 decrease"),
-        'f': (set_j, [right, rj[4], 0.1], "right_w0 increase"),
-        'a': (set_j, [right, rj[4], -0.1], "right_w0 decrease"),
-        'd': (set_j, [right, rj[5], 0.1], "right_w1 increase"),
-        's': (set_j, [right, rj[5], -0.1], "right_w1 decrease"),
-        'v': (set_j, [right, rj[6], 0.1], "right_w2 increase"),
-        'z': (set_j, [right, rj[6], -0.1], "right_w2 decrease"),
-        'c': (grip_right.close, [], "right: gripper close"),
-        'x': (grip_right.open, [], "right: gripper open"),
-        'b': (grip_right.calibrate, [], "right: gripper calibrate"),
-     } 
     
-    
+    def set_arm_pos(lim,pos_dict):
+        lim.set_join_positions(pos_dict)
+
+    default_l_pos = {
+        lj[0] : 0.00383 ,
+        lj[1] : 1.285150,
+        lj[2] : -0.014189,
+        lj[3] : -0.00920388,
+        lj[4] : 0.742446,
+        lj[5] : -0.00383,
+        lj[6] : -0.55146609,
+
+    }
+    default_r_pos = {
+        rj[0] : 0.00766,
+        rj[1] : -0.55338,
+        rj[2] : 0.006135,
+        rj[3] : 1.25748,
+        rj[4] : 0.0130388,
+        rj[5] : 0.0084368,
+        rj[6] : 0.744747,
+
+    }
+    mv_l_pos = {
+        lj[0] : 0.097024,
+        lj[1] : 1.27090,
+        lj[2] : 0.087820,
+        lj[3] : -0.025310,
+        lj[4] : 0.5957102,
+        lj[5] : -0.92384,
+        lj[6] : -0.33402,
+
+    }
+    mv_r_pos = {
+        rj[0] : 0.85826,
+        rj[1] : -0.465561,
+        rj[2] : 0.00766699,
+        rj[3] : 0.9641069,
+        rj[4] : 0.06519418,
+        rj[5] : -0.0928058,
+        rj[6] : 0.886257,
+
+    }
     left = baxter_interface.Limb('left')
     right = baxter_interface.Limb('right')
     print("left join_states",left.joint_angles())
 
     print("right joint states ",right.joint_angles(),"\n")
+    set_arm_pos(left,default_l_pos)
+    set_arm_pos(right,default_r_pos)
+    set_arm_pos(left,mv_l_pos)
+    set_arm_pos(right,mv_r_pos)
+    set_arm_pos(left,default_l_pos)
+    set_arm_pos(right,default_r_pos)
     rospy.signal_shutdown("Example finished.")
 
 
