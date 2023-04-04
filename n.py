@@ -65,6 +65,7 @@ def map_keyboard():
             limb.set_joint_positions(pos_dict)
             print("vector diff is ",diff)
             print(limb.joint_angles())
+            diff =vector_diff(limb.joint_angles(),pos_dict)
             y=raw_input("break?")
             if y=="y":
                 break
