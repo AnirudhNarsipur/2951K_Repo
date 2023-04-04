@@ -48,13 +48,21 @@ def map_keyboard():
     lj = left.joint_names()
     rj = right.joint_names()
 
+    def vector_diff(v1,v2):
+        return sum([abs(i -j) for i,j in zip(v1.values(),v2.values())])
+
     def set_j(limb, joint_name, delta):
         current_position = limb.joint_angle(joint_name)
         joint_command = {joint_name: current_position + delta}
         limb.set_joint_positions(joint_command)
+       
+    
     
     def set_arm_pos(limb,pos_dict):
         limb.set_joint_positions(pos_dict)
+        while vector_diff(limb.joint_angles(),pos_dict) > 0.01:
+            limb.set_joint_positions(pos_dict)
+
 
     default_l_pos = {
         lj[0] : 0.00383 ,
