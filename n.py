@@ -91,7 +91,8 @@ def map_keyboard():
         'x': (grip_right.open, [], "right: gripper open"),
         'b': (grip_right.calibrate, [], "right: gripper calibrate"),
      }
-    print("left join_states",lj,"\n")
+    left = baxter_interface.Limb('left')
+    print("left join_states",left.joint_angles(),"\n")
     print("right joint states ",rj,"\n")
     rospy.signal_shutdown("Example finished.")
 
