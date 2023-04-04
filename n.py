@@ -61,7 +61,7 @@ def map_keyboard():
     def set_arm_pos(limb,pos_dict):
         limb.set_joint_positions(pos_dict)
         diff =vector_diff(limb.joint_angles(),pos_dict)
-        while diff > 0.001:
+        while diff > 0.01:
             limb.set_joint_positions(pos_dict)
             print("vector diff is ",diff)
             print(limb.joint_angles())
