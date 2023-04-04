@@ -60,8 +60,9 @@ def map_keyboard():
     
     def set_arm_pos(limb,pos_dict):
         limb.set_joint_positions(pos_dict)
-        while vector_diff(limb.joint_angles(),pos_dict) > 0.01:
-            limb.set_joint_positions(pos_dict)
+        while vector_diff(limb.joint_angles(),pos_dict) > 0.001:
+            # limb.set_joint_positions(pos_dict)
+            pass
 
 
     default_l_pos = {
