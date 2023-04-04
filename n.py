@@ -99,7 +99,6 @@ def map_keyboard():
     left = baxter_interface.Limb('left')
     right = baxter_interface.Limb('right')
     print("left join_states",left.joint_angles())
-    print("left enpoint pose" , left.endpoint_pose())
     
     print("right joint states ",right.joint_angles(),"\n")
     set_arm_pos(left,default_l_pos)
