@@ -54,7 +54,7 @@ def map_keyboard():
         limb.set_joint_positions(joint_command)
     
     def set_arm_pos(lim,pos_dict):
-        lim.set_join_positions(pos_dict)
+        lim.set_joint_positions(pos_dict)
 
     default_l_pos = {
         lj[0] : 0.00383 ,
