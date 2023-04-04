@@ -90,7 +90,9 @@ def map_keyboard():
         'c': (grip_right.close, [], "right: gripper close"),
         'x': (grip_right.open, [], "right: gripper open"),
         'b': (grip_right.calibrate, [], "right: gripper calibrate"),
-     }
+     } 
+    
+    
     left = baxter_interface.Limb('left')
     right = baxter_interface.Limb('right')
     print("left join_states",left.joint_angles())
