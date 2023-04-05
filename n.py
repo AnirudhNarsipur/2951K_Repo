@@ -37,6 +37,8 @@ import rospy
 import baxter_interface
 import baxter_external_devices
 
+from time import sleep
+
 from baxter_interface import CHECK_VERSION
 
 
@@ -117,11 +119,18 @@ def map_keyboard():
     print("left join_states",left.joint_angles())
     
     print("right joint states ",right.joint_angles(),"\n")
+
+    print("moving left to default")
     set_arm_pos(left,default_l_pos)
+    print("moving right to default")
     set_arm_pos(right,default_r_pos)
+    print("moving left to middle")
     set_arm_pos(left,mv_l_pos)
+    print("moving right to middle")
     set_arm_pos(right,mv_r_pos)
+    print("moving left to default")
     set_arm_pos(left,default_l_pos)
+    print("moving right to default")
     set_arm_pos(right,default_r_pos)
     rospy.signal_shutdown("Example finished.")
 
