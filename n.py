@@ -118,9 +118,12 @@ def map_keyboard():
     }
     left = baxter_interface.Limb('left')
     right = baxter_interface.Limb('right')
+    grip_left = baxter_interface.Gripper('left', CHECK_VERSION)
+    grip_right = baxter_interface.Gripper('right', CHECK_VERSION)
     done = False
     pos_dict = {}
     index = 0 
+    print("Enter Command")
     while not done and not rospy.is_shutdown():
         c = baxter_external_devices.getch()
         if c:
@@ -138,6 +141,12 @@ def map_keyboard():
                     set_arm_pos(right,pos_dict[int(c)]['r'])
                 else:
                     print("Invalid Index")
+            elif c == "o":
+                grip_left.open()
+                grip_right.open()
+            elif c == "c":
+                grip_left.close()
+                grip_right.close()
             else:
                 print("Enter valid input")
          
