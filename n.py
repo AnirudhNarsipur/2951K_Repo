@@ -118,22 +118,49 @@ def map_keyboard():
     }
     left = baxter_interface.Limb('left')
     right = baxter_interface.Limb('right')
-    print("left join_states",left.joint_angles())
-    
-    print("right joint states ",right.joint_angles(),"\n")
+    done = False
+    pos_dict = {}
+    index = 0 
+    while not done and not rospy.is_shutdown():
+        c = baxter_external_devices.getch()
+        if c:
+            if c == 'q':
+                done = True 
+            elif c == 'r':
+                lpos,rpos =  left.joint_angles(),right.joint_angles()
+                print("Recording lpos: ",lpos," rpos ",rpos," at index ",str(index))
+                pos_dict[index] = {'l' : lpos , 'r' : rpos }
+                index+=1
+            elif str.isdigit(c):
+                if int(c) in pos_dict:
+                    print("Moving to position ",c )
+                    set_arm_pos(left,pos_dict[int(c)]['l'])
+                    set_arm_pos(right,pos_dict[int(c)]['r'])
+                else:
+                    print("Invalid Index")
+            else:
+                print("Enter valid input")
+         
 
-    print("moving left to default")
-    set_arm_pos(left,default_l_pos)
-    print("moving right to default")
-    set_arm_pos(right,default_r_pos)
-    print("moving left to middle")
-    set_arm_pos(left,mv_l_pos)
-    print("moving right to middle")
-    set_arm_pos(right,mv_r_pos)
-    print("moving left to default")
-    set_arm_pos(left,default_l_pos)
-    print("moving right to default")
-    set_arm_pos(right,default_r_pos)
+
+
+
+    # print("left join_states",left.joint_angles())
+    
+    # print("right joint states ",right.joint_angles(),"\n")
+
+    # print("moving left to default")
+    # set_arm_pos(left,default_l_pos)
+    # print("moving right to default")
+    # set_arm_pos(right,default_r_pos)
+    # print("moving left to middle")
+    # set_arm_pos(left,mv_l_pos)
+    # print("moving right to middle")
+    # set_arm_pos(right,mv_r_pos)
+    # print("moving left to default")
+    # set_arm_pos(left,default_l_pos)
+    # print("moving right to default")
+    # set_arm_pos(right,default_r_pos)
     rospy.signal_shutdown("Example finished.")
 
 
