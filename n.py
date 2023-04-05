@@ -120,6 +120,7 @@ def map_keyboard():
     right = baxter_interface.Limb('right')
     grip_left = baxter_interface.Gripper('left', CHECK_VERSION)
     grip_right = baxter_interface.Gripper('right', CHECK_VERSION)
+    
     done = False
     pos_dict = {}
     index = 0 
