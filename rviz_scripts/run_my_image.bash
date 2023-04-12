@@ -39,5 +39,3 @@ docker run -it \
     bash
 
 echo "Done."
-
-#this is the script from the instructions
