@@ -12,9 +12,11 @@ if __name__ == "__main__":
     listener = tf2_ros.TransformListener(tfBuffer)
 
     rate = rospy.Rate(10.0)
-    try:
-        trans = tfBuffer.lookup_transform("base", TAG_NAME, rospy.Time())
-    except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException):
-        print("Error!")
-        exit(0)
+    while rospy.is_shutdown():
+        try:
+            trans = tfBuffer.lookup_transform("base", TAG_NAME, rospy.Time())
+            break
+        except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException):
+            print("Error!")
+            continue
     print("got tf ",trans)
