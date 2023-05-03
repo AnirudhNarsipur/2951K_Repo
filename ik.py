@@ -113,16 +113,16 @@ def get_transform(tag_name):
             print("Error! " , e)
             continue
     pos = {
-        "x" : trans.translation.x , 
-        "y" : trans.translation.y , 
-        "z" : trans.translation.z ,   
+        "x" : trans.transform.translation.x , 
+        "y" : trans.transform.translation.y , 
+        "z" : trans.transform.translation.z ,   
 
     }
     ornt = {
-        "x" : trans.translation.x , 
-        "y" : trans.translation.y , 
-        "z" : trans.translation.z ,   
-        "w" : trans.translation.w 
+        "x" : trans.transform.rotation.x , 
+        "y" : trans.transform.rotation.y , 
+        "z" : trans.transform.rotation.z ,   
+        "w" : trans.transform.rotation.w 
 
     }
     print("returning ",pos,ornt)
