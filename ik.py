@@ -25,7 +25,7 @@ from baxter_core_msgs.srv import (
     SolvePositionIKRequest,
 )
 
-rospy.init_node("rsdk_ik_service_client")
+# rospy.init_node("rsdk_ik_service_client")
 def ik_test(limb,lpos,lor,rpos,ror):
     
     ns = "ExternalTools/" + limb + "/PositionKinematicsNode/IKService"
@@ -99,7 +99,7 @@ def ik_test(limb,lpos,lor,rpos,ror):
 
 def get_transform(tag_name):
 
-    # rospy.init_node('tf2_april_listener')
+    rospy.init_node('tf2_april_listener')
 
     tfBuffer = tf2_ros.Buffer()
     listener = tf2_ros.TransformListener(tfBuffer)
@@ -123,6 +123,7 @@ def get_transform(tag_name):
         "w" : trans.translation.w 
 
     }
+    print("returning ",pos,ornt)
     return pos,ornt 
 
 def main():
