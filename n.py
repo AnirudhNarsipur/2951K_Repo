@@ -41,6 +41,26 @@ from time import sleep
 
 from baxter_interface import CHECK_VERSION
 
+import rospy
+
+import math
+import tf2_ros
+
+def get_transform():
+    TAG_NAME = "tag_0"
+    rospy.init_node('tf2_turtle_listener')
+
+    tfBuffer = tf2_ros.Buffer()
+    listener = tf2_ros.TransformListener(tfBuffer)
+
+    rate = rospy.Rate(10.0)
+    try:
+        trans = tfBuffer.lookup_transform("base", TAG_NAME, rospy.Time())
+    except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException):
+        print("Error!")
+        return None
+
+    return trans
 
 def map_keyboard():
     left = baxter_interface.Limb('left')
