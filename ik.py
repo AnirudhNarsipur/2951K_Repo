@@ -107,8 +107,8 @@ def get_transform(tag_name):
     rate = rospy.Rate(10.0)
     try:
         trans = tfBuffer.lookup_transform("base", tag_name, rospy.Time())
-    except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException):
-        print("Error!")
+    except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException), e:
+        print("Error! " , e)
         return None
     pos = {
         "x" : trans.translation.x , 
